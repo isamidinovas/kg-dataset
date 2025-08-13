@@ -5,8 +5,15 @@ import re
 import json
 import google.generativeai as genai
 import pandas as pd
+from dotenv import load_dotenv
 
-genai.configure(api_key="AIzaSyCbXLAcjDJ_F1r5KOFxCX-RTjlSE7SklEU")
+# Загружаем переменные окружения из .env
+load_dotenv()
+api_key = os.getenv("GENAI_API_KEY")
+if not api_key:
+    raise ValueError("API ключ не найден. Проверьте файл .env")
+
+genai.configure(api_key=api_key)
 model = genai.GenerativeModel("gemini-2.5-flash")
 
 AUTO_PROMPT = (
@@ -55,8 +62,8 @@ def extract_qa_pairs(text: str) -> list[tuple[str, str]]:
     return matches
 
 def main():
-    file_path = "data/Азыркы_кыргыз_тилинин_фонетикасы.txt"
-    output_file = "Азыркы_кыргыз_тилинин_фонетикасы.xlsx"
+    file_path = "data/Адабият теориясы(okuma.kg)_Кыргыз тили жана адабияты71.txt"
+    output_file = "Адабият теориясы(okuma.kg)_Кыргыз тили жана адабияты71.xlsx"
 
     if not os.path.exists(file_path):
         print(f"❌ Файл {file_path} не найден.")

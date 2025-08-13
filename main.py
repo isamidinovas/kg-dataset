@@ -7,7 +7,7 @@ import json
 import google.generativeai as genai
 import pandas as pd
 
-genai.configure(api_key="AIzaSyCbXLAcjDJ_F1r5KOFxCX-RTjlSE7SklEU")
+
 model = genai.GenerativeModel("gemini-2.0-flash")
 AUTO_PROMPT = (
     "Прочти приведённый ниже текст и на его основе создай **информативный, глубокий и разноплановый датасет** "
